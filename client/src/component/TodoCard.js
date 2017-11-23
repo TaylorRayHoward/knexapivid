@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import SingleTodoList from './SingleTodoList';
 import SingleTodoEdit from './CreateEditTodo';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 class TodoCard extends Component {
   constructor(props) {
@@ -12,11 +14,18 @@ class TodoCard extends Component {
     };
     this.toggleEdit = this.toggleEdit.bind(this);
     this.handleState = this.handleState.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   toggleEdit() {
     this.setState({
       editing: !this.state.editing
+    });
+  }
+
+  onDelete() {
+    axios.delete(`/api/todo/${this.props.id}`).then(() => {
+      this.props.history.push('/');
     });
   }
 
@@ -32,9 +41,9 @@ class TodoCard extends Component {
                         updateState={this.handleState}/>
       );
     return (
-      <SingleTodoList isDone={isDone} title={title} onClick={this.toggleEdit}/>
+      <SingleTodoList isDone={isDone} title={title} onEdit={this.toggleEdit} onDelete={this.onDelete}/>
     );
   }
 }
 
-export default TodoCard;
+export default withRouter(TodoCard);
