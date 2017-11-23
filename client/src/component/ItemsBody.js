@@ -13,38 +13,30 @@ class ItemsBody extends Component {
     };
   }
 
-  componentDidMount() {
-    axios.get('/api/todo').then(response => {
-      this.setState({
-        loading: false,
-        todos: response.data
-      });
+  componentWillMount() {
+    axios.get('/api/todo').then((response) => {
+      this.setState({ loading: false, todos: response.data });
     });
-  }
-
-  render() {
-    if (this.state.loading === true) {
-      return (
-        <h1>Loading...</h1>
-      );
-    }
-    return (
-      <div style={{
-        marginBottom: '1.25rem'
-      }}>
-      <ListItems>
-        {this.renderTodos()}
-      </ListItems>
-      </div>
-    );
   }
 
   renderTodos() {
-    return _.map(this.state.todos, todo => {
+    console.log(this.state.todos);
+    return _.map(this.state.todos, (todo) => {
       return (
-        <ListItem key={todo.id} title={todo.title} isDone={todo.is_done} id={todo.id}/>
-      );
-    });
+        <ListItem key={todo.id} text={todo.title} />
+      )
+    })
+  }
+
+  render() {
+    if (this.state.loading)
+      return (<div>Loading...</div>);
+
+    return (
+      <ListItems>
+        {this.renderTodos()}
+      </ListItems>
+    );
   }
 }
 
