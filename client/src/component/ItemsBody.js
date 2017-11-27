@@ -20,12 +20,11 @@ class ItemsBody extends Component {
   }
 
   renderTodos() {
-    console.log(this.state.todos);
     return _.map(this.state.todos, (todo) => {
       return (
-        <ListItem key={todo.id} text={todo.title} />
-      )
-    })
+        <ListItem key={todo.id} text={todo.title} isDone={todo.is_done} id={todo.id}/>
+      );
+    });
   }
 
   render() {
