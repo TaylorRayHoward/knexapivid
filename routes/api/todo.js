@@ -3,10 +3,6 @@ const router = express.Router();
 const db = require('../../database');
 
 router.get('/', function (req, res) {
-  db.raw('SELECT * FROM public.todo;').then(data => {
-    console.log(data);
-  });
-
   db.select().from('todo').orderBy('id').then(function (data) {
     res.send(data);
   });
