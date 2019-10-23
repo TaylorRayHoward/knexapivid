@@ -17,7 +17,7 @@
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "knex": "^0.14.2",
+    "knex": "^0.19.5",
     "pg": "^7.4.0"
   },
   "devDependencies": {
